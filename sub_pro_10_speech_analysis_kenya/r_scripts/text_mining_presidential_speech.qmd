@@ -1,0 +1,162 @@
+---
+title: "Text Mining a Presidential Speech"
+author: "Your Name"
+date: "`r Sys.Date()`"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    code-fold: true
+editor: visual
+---
+
+## 1. Load Required Libraries
+
+```{r}
+library(pdftools)
+library(tidytext)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(wordcloud)
+library(igraph)
+library(ggraph)
+library(tm)
+library(textdata)
+```  
+
+## 2. Read the PDF and Prepare the Text
+
+```{r}
+# Read PDF speech file
+text <- pdf_text("presidential_speech.pdf")
+
+# Collapse pages into one string
+speech <- paste(text, collapse = " ")
+
+# Create data frame
+speech_df <- data.frame(text = speech, stringsAsFactors = FALSE)
+```  
+
+## 3. Tokenize and Remove Stop Words
+
+```{r}
+# Tokenize
+tokens <- speech_df %>%
+  unnest_tokens(word, text)
+
+# Remove stop words
+data("stop_words")
+tokens_clean <- tokens %>%
+  anti_join(stop_words, by = "word")
+```  
+
+## 4. Word Frequency Plot
+
+```{r}
+tokens_clean %>%
+  count(word, sort = TRUE) %>%
+  top_n(20) %>%
+  ggplot(aes(reorder(word, n), n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Top 20 Most Common Words", x = NULL, y = "Frequency")
+```  
+
+## 5. Word Cloud
+
+```{r}
+library(RColorBrewer)
+tokens_clean %>%
+  count(word) %>%
+  with(wordcloud(word, n, max.words = 100, colors = brewer.pal(8, "Dark2")))
+```  
+
+## 6. Sentiment Analysis (Bing)
+
+```{r}
+bing_sentiments <- tokens_clean %>%
+  inner_join(get_sentiments("bing"), by = "word")
+
+bing_sentiments %>%
+  count(sentiment, sort = TRUE) %>%
+  ggplot(aes(x = sentiment, y = n, fill = sentiment)) +
+  geom_col(show.legend = FALSE) +
+  labs(title = "Sentiment Counts")
+```  
+
+## 7. Bigram Network
+
+```{r}
+bigrams <- speech_df %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)
+
+bigrams_separated <- bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  filter(!word1 %in% stop_words$word, !word2 %in% stop_words$word)
+
+bigram_counts <- bigrams_separated %>%
+  count(word1, word2, sort = TRUE)
+
+bigram_graph <- bigram_counts %>%
+  filter(n > 3) %>%
+  graph_from_data_frame()
+
+ggraph(bigram_graph, layout = "fr") +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE) +
+  geom_node_point(color = "lightblue", size = 3) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+```  
+
+## 8. TF-IDF Analysis by Paragraph
+
+```{r}
+speech_paragraphs <- data.frame(
+  paragraph = unlist(strsplit(speech, split = "\n\n")),
+  stringsAsFactors = FALSE
+)
+
+speech_paragraphs <- speech_paragraphs %>%
+  mutate(id = row_number()) %>%
+  unnest_tokens(word, paragraph) %>%
+  anti_join(stop_words)
+
+speech_paragraphs %>%
+  count(id, word) %>%
+  bind_tf_idf(word, id, n) %>%
+  arrange(desc(tf_idf)) %>%
+  top_n(15, tf_idf) %>%
+  ggplot(aes(reorder(word, tf_idf), tf_idf, fill = factor(id))) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Top TF-IDF Words by Paragraph")
+```  
+
+## 9. (Optional) Readability Metrics
+
+```{r}
+library(quanteda)
+corp <- corpus(speech)
+textstat_readability(corp, measure = "Flesch.Kincaid")
+```  
+
+## 10. (Optional) Topic Modeling (LDA)
+
+```{r}
+library(topicmodels)
+dtm <- tokens_clean %>%
+  count(word) %>%
+  cast_dtm(document = 1, term = word, value = n)
+
+lda_model <- LDA(dtm, k = 2, control = list(seed = 1234))
+tidy(lda_model, matrix = "beta") %>%
+  group_by(topic) %>%
+  top_n(10, beta) %>%
+  ungroup() %>%
+  ggplot(aes(reorder(term, beta), beta, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  coord_flip()
