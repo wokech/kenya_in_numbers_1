@@ -78,10 +78,10 @@ athi_river_avg_price <- all_data_avg_price |>
   filter(location %in% "Athi River") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -96,10 +96,12 @@ athi_river_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -121,12 +123,12 @@ athi_river_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -134,7 +136,7 @@ athi_river_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -142,10 +144,12 @@ athi_river_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),              
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -164,11 +168,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/athi_river/athi_river_percentile.png
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.42, 36.94),   
+  lowerRight = c(-1.47, 36.99), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Athi River
@@ -196,7 +200,7 @@ athi_river_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/athi_river/athi_river_map.png", 
-       athi_river_map, width = 12, height = 8, dpi = 300)
+       athi_river_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -209,10 +213,10 @@ donholm_avg_price <- all_data_avg_price |>
   filter(location %in% "Donholm") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -227,10 +231,12 @@ donholm_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -252,12 +258,12 @@ donholm_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -265,7 +271,7 @@ donholm_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -273,10 +279,12 @@ donholm_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -295,11 +303,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/donholm/donholm_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.27, 36.86),   
+  lowerRight = c(-1.32, 36.91), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Donholm
@@ -327,7 +335,7 @@ donholm_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/donholm/donholm_map.png", 
-       donholm_map, width = 12, height = 8, dpi = 300)
+       donholm_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -340,10 +348,10 @@ eastleigh_avg_price <- all_data_avg_price |>
   filter(location %in% "Eastleigh") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -358,10 +366,12 @@ eastleigh_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -383,12 +393,12 @@ eastleigh_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -396,7 +406,7 @@ eastleigh_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -404,10 +414,12 @@ eastleigh_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -426,11 +438,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/eastleigh/eastleigh_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.25, 36.82),   
+  lowerRight = c(-1.30, 36.87), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Eastleigh
@@ -458,7 +470,7 @@ eastleigh_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/eastleigh/eastleigh_map.png", 
-       eastleigh_map, width = 12, height = 8, dpi = 300)
+       eastleigh_map, width = 12, height = 12, dpi = 300)
 
 ################################################################################
 # 4) Gigiri
@@ -470,10 +482,10 @@ gigiri_avg_price <- all_data_avg_price |>
   filter(location %in% "Gigiri") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -488,10 +500,12 @@ gigiri_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -513,12 +527,12 @@ gigiri_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -526,7 +540,7 @@ gigiri_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -534,10 +548,12 @@ gigiri_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -556,11 +572,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/gigiri/gigiri_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.21, 36.78),   
+  lowerRight = c(-1.26, 36.83), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Gigiri
@@ -588,7 +604,7 @@ gigiri_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/gigiri/gigiri_map.png", 
-       gigiri_map, width = 12, height = 8, dpi = 300)
+       gigiri_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -601,10 +617,10 @@ juja_avg_price <- all_data_avg_price |>
   filter(location %in% "Juja") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -619,10 +635,12 @@ juja_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -644,12 +662,12 @@ juja_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -657,7 +675,7 @@ juja_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -665,10 +683,12 @@ juja_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -687,11 +707,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/juja/juja_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.08, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.08, 36.98),   
+  lowerRight = c(-1.13, 37.03), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Juja
@@ -719,7 +739,7 @@ juja_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/juja/juja_map.png", 
-       juja_map, width = 12, height = 8, dpi = 300)
+       juja_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -732,10 +752,10 @@ karen_avg_price <- all_data_avg_price |>
   filter(location %in% "Karen") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -750,10 +770,12 @@ karen_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -775,12 +797,12 @@ karen_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -788,7 +810,7 @@ karen_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -796,10 +818,12 @@ karen_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -818,11 +842,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/karen/karen_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.30, 36.68),   
+  lowerRight = c(-1.35, 36.73), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Karen
@@ -850,7 +874,7 @@ karen_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/karen/karen_map.png", 
-       karen_map, width = 12, height = 8, dpi = 300)
+       karen_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -863,10 +887,10 @@ kiambu_avg_price <- all_data_avg_price |>
   filter(location %in% "Kiambu") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -881,10 +905,12 @@ kiambu_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -906,12 +932,12 @@ kiambu_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -919,7 +945,7 @@ kiambu_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -927,10 +953,12 @@ kiambu_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -949,11 +977,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kiambu/kiambu_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.14, 36.80),   
+  lowerRight = c(-1.19, 36.85), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kiambu
@@ -981,7 +1009,7 @@ kiambu_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kiambu/kiambu_map.png", 
-       kiambu_map, width = 12, height = 8, dpi = 300)
+       kiambu_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -994,10 +1022,10 @@ kileleshwa_avg_price <- all_data_avg_price |>
   filter(location %in% "Kileleshwa") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1012,10 +1040,12 @@ kileleshwa_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1037,12 +1067,12 @@ kileleshwa_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1050,7 +1080,7 @@ kileleshwa_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1058,10 +1088,12 @@ kileleshwa_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1080,11 +1112,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kileleshwa/kileleshwa_percentile.png
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.25, 36.77),   
+  lowerRight = c(-1.30, 36.82), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kileleshwa
@@ -1112,7 +1144,7 @@ kileleshwa_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kileleshwa/kileleshwa_map.png", 
-       kileleshwa_map, width = 12, height = 8, dpi = 300)
+       kileleshwa_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -1125,10 +1157,10 @@ kilimani_avg_price <- all_data_avg_price |>
   filter(location %in% "Kilimani") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1143,10 +1175,12 @@ kilimani_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1168,12 +1202,12 @@ kilimani_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1181,7 +1215,7 @@ kilimani_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1189,10 +1223,12 @@ kilimani_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1211,11 +1247,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kilimani/kilimani_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.26, 36.76),   
+  lowerRight = c(-1.31, 36.81), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kilimani
@@ -1243,7 +1279,7 @@ kilimani_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kilimani/kilimani_map.png", 
-       kilimani_map, width = 12, height = 8, dpi = 300)
+       kilimani_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -1256,10 +1292,10 @@ kiserian_avg_price <- all_data_avg_price |>
   filter(location %in% "Kiserian") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1274,10 +1310,12 @@ kiserian_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1299,12 +1337,12 @@ kiserian_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1312,7 +1350,7 @@ kiserian_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1320,10 +1358,12 @@ kiserian_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1342,11 +1382,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kiserian/kiserian_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.41, 36.66),   
+  lowerRight = c(-1.46, 36.71), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kiserian
@@ -1374,7 +1414,7 @@ kiserian_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kiserian/kiserian_map.png", 
-       kiserian_map, width = 12, height = 8, dpi = 300)
+       kiserian_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -1387,10 +1427,10 @@ kitengela_avg_price <- all_data_avg_price |>
   filter(location %in% "Kitengela") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1405,10 +1445,12 @@ kitengela_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1430,12 +1472,12 @@ kitengela_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1443,7 +1485,7 @@ kitengela_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1451,10 +1493,12 @@ kitengela_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1473,11 +1517,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kitengela/kitengela_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.45, 36.94),   
+  lowerRight = c(-1.5, 36.99), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kitengela
@@ -1505,7 +1549,7 @@ kitengela_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kitengela/kitengela_map.png", 
-       kitengela_map, width = 12, height = 8, dpi = 300)
+       kitengela_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -1518,10 +1562,10 @@ kitisuru_avg_price <- all_data_avg_price |>
   filter(location %in% "Kitisuru") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1536,10 +1580,12 @@ kitisuru_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1561,12 +1607,12 @@ kitisuru_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1574,7 +1620,7 @@ kitisuru_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1582,10 +1628,12 @@ kitisuru_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1604,11 +1652,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/kitisuru/kitisuru_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.22, 36.75),   
+  lowerRight = c(-1.27, 36.80), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kitisuru
@@ -1636,7 +1684,7 @@ kitisuru_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/kitisuru/kitisuru_map.png", 
-       kitisuru_map, width = 12, height = 8, dpi = 300)
+       kitisuru_map, width = 12, height = 12, dpi = 300)
 
 
 
@@ -1650,10 +1698,10 @@ langata_avg_price <- all_data_avg_price |>
   filter(location %in% "Langata") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1668,10 +1716,12 @@ langata_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1693,12 +1743,12 @@ langata_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1706,7 +1756,7 @@ langata_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1714,10 +1764,12 @@ langata_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1736,11 +1788,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/langata/langata_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.31, 36.76),   
+  lowerRight = c(-1.36, 36.81), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Langata
@@ -1768,7 +1820,7 @@ langata_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/langata/langata_map.png", 
-       langata_map, width = 12, height = 8, dpi = 300)
+       langata_map, width = 12, height = 12, dpi = 300)
 
 
 
@@ -1782,10 +1834,10 @@ lavington_avg_price <- all_data_avg_price |>
   filter(location %in% "Lavington") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1800,10 +1852,12 @@ lavington_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1825,12 +1879,12 @@ lavington_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1838,7 +1892,7 @@ lavington_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1846,10 +1900,12 @@ lavington_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1868,11 +1924,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/lavington/lavington_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.24, 36.75),   
+  lowerRight = c(-1.29, 36.80), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Lavington
@@ -1900,7 +1956,7 @@ lavington_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/lavington/lavington_map.png", 
-       lavington_map, width = 12, height = 8, dpi = 300)
+       lavington_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -1913,10 +1969,10 @@ limuru_avg_price <- all_data_avg_price |>
   filter(location %in% "Limuru") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1931,10 +1987,12 @@ limuru_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1956,12 +2014,12 @@ limuru_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -1969,7 +2027,7 @@ limuru_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -1977,10 +2035,12 @@ limuru_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -1999,11 +2059,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/limuru/limuru_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.09, 36.61),   
+  lowerRight = c(-1.14, 36.66), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Limuru
@@ -2031,7 +2091,7 @@ limuru_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/limuru/limuru_map.png", 
-       limuru_map, width = 12, height = 8, dpi = 300)
+       limuru_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2044,10 +2104,10 @@ loresho_avg_price <- all_data_avg_price |>
   filter(location %in% "Loresho") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2062,10 +2122,12 @@ loresho_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2087,12 +2149,12 @@ loresho_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2100,7 +2162,7 @@ loresho_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2108,10 +2170,12 @@ loresho_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2130,11 +2194,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/loresho/loresho_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.23, 36.72),   
+  lowerRight = c(-1.28, 36.77), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Loresho
@@ -2162,7 +2226,7 @@ loresho_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/loresho/loresho_map.png", 
-       loresho_map, width = 12, height = 8, dpi = 300)
+       loresho_map, width = 12, height = 12, dpi = 300)
 
 
 
@@ -2176,10 +2240,10 @@ mlolongo_avg_price <- all_data_avg_price |>
   filter(location %in% "Mlolongo") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2194,10 +2258,12 @@ mlolongo_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2219,12 +2285,12 @@ mlolongo_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2232,7 +2298,7 @@ mlolongo_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2240,10 +2306,12 @@ mlolongo_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2262,11 +2330,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/mlolongo/mlolongo_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.36, 36.92),   
+  lowerRight = c(-1.41, 36.97), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Mlolongo
@@ -2294,7 +2362,7 @@ mlolongo_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/mlolongo/mlolongo_map.png", 
-       mlolongo_map, width = 12, height = 8, dpi = 300)
+       mlolongo_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2307,10 +2375,10 @@ muthaiga_avg_price <- all_data_avg_price |>
   filter(location %in% "Muthaiga") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2325,10 +2393,12 @@ muthaiga_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2350,12 +2420,12 @@ muthaiga_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2363,7 +2433,7 @@ muthaiga_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2371,10 +2441,12 @@ muthaiga_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2393,11 +2465,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/muthaiga/muthaiga_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.23, 36.80),   
+  lowerRight = c(-1.28, 36.85), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Muthaiga
@@ -2425,7 +2497,7 @@ muthaiga_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/muthaiga/muthaiga_map.png", 
-       muthaiga_map, width = 12, height = 8, dpi = 300)
+       muthaiga_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2438,10 +2510,10 @@ ngong_avg_price <- all_data_avg_price |>
   filter(location %in% "Ngong") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2456,10 +2528,12 @@ ngong_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2481,12 +2555,12 @@ ngong_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2494,7 +2568,7 @@ ngong_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2502,10 +2576,12 @@ ngong_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2524,11 +2600,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/ngong/ngong_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.34, 36.63),   
+  lowerRight = c(-1.39, 36.68), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ngong
@@ -2556,7 +2632,7 @@ ngong_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/ngong/ngong_map.png", 
-       ngong_map, width = 12, height = 8, dpi = 300)
+       ngong_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2569,10 +2645,10 @@ nyari_avg_price <- all_data_avg_price |>
   filter(location %in% "Nyari") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2587,10 +2663,12 @@ nyari_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2612,12 +2690,12 @@ nyari_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2625,7 +2703,7 @@ nyari_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2633,10 +2711,12 @@ nyari_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2655,11 +2735,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/nyari/nyari_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.20, 36.76),   
+  lowerRight = c(-1.25, 36.81), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Nyari
@@ -2687,7 +2767,7 @@ nyari_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/nyari/nyari_map.png", 
-       nyari_map, width = 12, height = 8, dpi = 300)
+       nyari_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2700,10 +2780,10 @@ ongata_rongai_avg_price <- all_data_avg_price |>
   filter(location %in% "Ongata Rongai") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2718,10 +2798,12 @@ ongata_rongai_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2743,12 +2825,12 @@ ongata_rongai_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2756,7 +2838,7 @@ ongata_rongai_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2764,10 +2846,12 @@ ongata_rongai_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2786,11 +2870,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/ongata_rongai/ongata_rongai_percenti
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.24, 36.79),   
+  lowerRight = c(-1.29, 36.83), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ongata Rongai
@@ -2818,7 +2902,7 @@ ongata_rongai_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/ongata_rongai/ongata_rongai_map.png", 
-       ongata_rongai_map, width = 12, height = 8, dpi = 300)
+       ongata_rongai_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2831,10 +2915,10 @@ parklands_avg_price <- all_data_avg_price |>
   filter(location %in% "Parklands") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2849,10 +2933,12 @@ parklands_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2874,12 +2960,12 @@ parklands_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2887,7 +2973,7 @@ parklands_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -2895,10 +2981,12 @@ parklands_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -2917,11 +3005,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/parklands/parklands_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.23, 36.80),   
+  lowerRight = c(-1.28, 36.85), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Parklands
@@ -2949,7 +3037,7 @@ parklands_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/parklands/parklands_map.png", 
-       parklands_map, width = 12, height = 8, dpi = 300)
+       parklands_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -2962,10 +3050,10 @@ ridgeways_avg_price <- all_data_avg_price |>
   filter(location %in% "Ridgeways") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -2980,10 +3068,12 @@ ridgeways_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3005,12 +3095,12 @@ ridgeways_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3018,7 +3108,7 @@ ridgeways_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3026,10 +3116,12 @@ ridgeways_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3048,11 +3140,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/ridgeways/ridgeways_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.20, 36.82),   
+  lowerRight = c(-1.25, 36.87), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ridgeways
@@ -3080,7 +3172,7 @@ ridgeways_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/ridgeways/ridgeways_map.png", 
-       ridgeways_map, width = 12, height = 8, dpi = 300)
+       ridgeways_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -3093,10 +3185,10 @@ riverside_avg_price <- all_data_avg_price |>
   filter(location %in% "Riverside") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3111,10 +3203,12 @@ riverside_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3136,12 +3230,12 @@ riverside_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3149,7 +3243,7 @@ riverside_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3157,10 +3251,12 @@ riverside_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3179,11 +3275,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/riverside/riverside_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.25, 36.77),   
+  lowerRight = c(-1.30, 36.82), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Riverside
@@ -3211,7 +3307,7 @@ riverside_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/riverside/riverside_map.png", 
-       riverside_map, width = 12, height = 8, dpi = 300)
+       riverside_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -3224,10 +3320,10 @@ ruaka_avg_price <- all_data_avg_price |>
   filter(location %in% "Ruaka") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3242,10 +3338,12 @@ ruaka_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3267,12 +3365,12 @@ ruaka_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3280,7 +3378,7 @@ ruaka_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3288,10 +3386,12 @@ ruaka_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3310,11 +3410,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/ruaka/ruaka_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.18, 36.76),   
+  lowerRight = c(-1.23, 36.81), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ruaka
@@ -3342,7 +3442,7 @@ ruaka_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/ruaka/ruaka_map.png", 
-       ruaka_map, width = 12, height = 8, dpi = 300)
+       ruaka_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -3355,10 +3455,10 @@ ruiru_avg_price <- all_data_avg_price |>
   filter(location %in% "Ruiru") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3373,10 +3473,12 @@ ruiru_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3398,12 +3500,12 @@ ruiru_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3411,7 +3513,7 @@ ruiru_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3419,10 +3521,12 @@ ruiru_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3441,11 +3545,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/ruiru/ruiru_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.12, 36.94),   
+  lowerRight = c(-1.17, 36.99), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ruiru
@@ -3473,7 +3577,7 @@ ruiru_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/ruiru/ruiru_map.png", 
-       ruiru_map, width = 12, height = 8, dpi = 300)
+       ruiru_map, width = 12, height = 12, dpi = 300)
 
 
 
@@ -3487,10 +3591,10 @@ runda_avg_price <- all_data_avg_price |>
   filter(location %in% "Runda") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3505,10 +3609,12 @@ runda_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3530,12 +3636,12 @@ runda_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3543,7 +3649,7 @@ runda_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3551,10 +3657,12 @@ runda_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3573,11 +3681,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/runda/runda_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.19, 36.78),   
+  lowerRight = c(-1.24, 36.83), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Runda
@@ -3605,7 +3713,7 @@ runda_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/runda/runda_map.png", 
-       runda_map, width = 12, height = 8, dpi = 300)
+       runda_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -3618,10 +3726,10 @@ spring_valley_avg_price <- all_data_avg_price |>
   filter(location %in% "Spring Valley") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3636,10 +3744,12 @@ spring_valley_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3661,12 +3771,12 @@ spring_valley_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3674,7 +3784,7 @@ spring_valley_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3682,10 +3792,12 @@ spring_valley_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3704,11 +3816,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/spring_valley/spring_valley_percenti
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.23, 36.77),   
+  lowerRight = c(-1.28, 36.82), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Spring Valley
@@ -3736,7 +3848,7 @@ spring_valley_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/spring_valley/spring_valley_map.png", 
-       spring_valley_map, width = 12, height = 8, dpi = 300)
+       spring_valley_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -3749,10 +3861,10 @@ syokimau_avg_price <- all_data_avg_price |>
   filter(location %in% "Syokimau") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3767,10 +3879,12 @@ syokimau_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3792,12 +3906,12 @@ syokimau_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3805,7 +3919,7 @@ syokimau_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3813,10 +3927,12 @@ syokimau_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3835,11 +3951,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/syokimau/syokimau_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.35, 36.90),   
+  lowerRight = c(-1.40, 36.95), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Syokimau
@@ -3867,7 +3983,7 @@ syokimau_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/syokimau/syokimau_map.png", 
-       syokimau_map, width = 12, height = 8, dpi = 300)
+       syokimau_map, width = 12, height = 12, dpi = 300)
 
 
 
@@ -3881,10 +3997,10 @@ thika_avg_price <- all_data_avg_price |>
   filter(location %in% "Thika") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3899,10 +4015,12 @@ thika_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3924,12 +4042,12 @@ thika_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -3937,7 +4055,7 @@ thika_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -3945,10 +4063,12 @@ thika_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -3967,11 +4087,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/thika/thika_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.02, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.01, 37.06),   
+  lowerRight = c(-1.06, 37.11), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Thika
@@ -3999,7 +4119,7 @@ thika_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/thika/thika_map.png", 
-       thika_map, width = 12, height = 8, dpi = 300)
+       thika_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -4012,10 +4132,10 @@ tigoni_avg_price <- all_data_avg_price |>
   filter(location %in% "Tigoni") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4030,10 +4150,12 @@ tigoni_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4055,12 +4177,12 @@ tigoni_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4068,7 +4190,7 @@ tigoni_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -4076,10 +4198,12 @@ tigoni_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4098,11 +4222,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/tigoni/tigoni_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.10, 36.66),   
+  lowerRight = c(-1.15, 36.71), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Tigoni
@@ -4130,7 +4254,7 @@ tigoni_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/tigoni/tigoni_map.png", 
-       tigoni_map, width = 12, height = 8, dpi = 300)
+       tigoni_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -4143,10 +4267,10 @@ upper_hill_avg_price <- all_data_avg_price |>
   filter(location %in% "Upperhill") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4161,10 +4285,12 @@ upper_hill_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4186,12 +4312,12 @@ upper_hill_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4199,7 +4325,7 @@ upper_hill_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -4207,10 +4333,12 @@ upper_hill_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4229,11 +4357,11 @@ ggsave("sub_pro_12_land_prices_kenya/images/upper_hill/upper_hill_percentile.png
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.28, 36.79),   
+  lowerRight = c(-1.33, 36.84), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Upper Hill
@@ -4261,7 +4389,7 @@ upper_hill_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/upper_hill/upper_hill_map.png", 
-       upper_hill_map, width = 12, height = 8, dpi = 300)
+       upper_hill_map, width = 12, height = 12, dpi = 300)
 
 
 ################################################################################
@@ -4274,10 +4402,10 @@ westlands_avg_price <- all_data_avg_price |>
   filter(location %in% "Westlands") |>
   filter(year != c(2025)) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line(size=1, color = "black") +
-  geom_point(size=2.5, color = "black") +
+  geom_line(size=2.5, color = "black") +
+  geom_point(size=5, color = "black") +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4292,10 +4420,12 @@ westlands_avg_price <- all_data_avg_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4317,12 +4447,12 @@ westlands_percentile <- all_data_percentile_price |>
                   ymin = x25th_percentile, 
                   ymax = x75th_percentile),
               fill = "goldenrod2", alpha = 0.6) +
-  geom_point(aes(x = quarter_year, y = x25th_percentile),size=2.5, color = "black") +
-  geom_point(aes(x = quarter_year, y = x75th_percentile),size=2.5, color = "black") +
-  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 1) +
-  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 1) +
+  geom_point(aes(x = quarter_year, y = x25th_percentile),size=5, color = "black") +
+  geom_point(aes(x = quarter_year, y = x75th_percentile),size=5, color = "black") +
+  geom_line(aes(x = quarter_year, y = x25th_percentile), color = "black", linewidth = 2.5) +
+  geom_line(aes(x = quarter_year, y = x75th_percentile), color = "black", linewidth = 2.5) +
   theme_classic() + 
-  scale_x_yearqtr(format = "Q%q %Y", n = 10,
+  scale_x_yearqtr(format = "Q%q %Y", n = 5,
                   minor_breaks = seq(from = min(all_data_avg_price$quarter_year), 
                                      to = max(all_data_avg_price$quarter_year), 
                                      by = 0.25)) +
@@ -4330,7 +4460,7 @@ westlands_percentile <- all_data_percentile_price |>
   scale_y_continuous(labels = scales::comma, 
                      breaks = scales::pretty_breaks(n = 5)) +
   labs(y = "Price (25th vs 75th Percentile) in KShs\nInterquartile Range",
-       x = "Year") +
+       x = "") +
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
@@ -4338,10 +4468,12 @@ westlands_percentile <- all_data_percentile_price |>
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
-        axis.text.x = element_text(size = 14, color = "black"),
-        axis.text.y = element_text(size = 20, color = "black"),
+        axis.text.x = element_text(size = 24, color = "black"),
+        axis.text.y = element_text(size = 24, color = "black"),
         axis.title.x = element_text(size=20),
-        axis.title.y = element_text(size=20),
+        axis.title.y = element_text(size=28),
+        axis.ticks = element_line(linewidth = 1),       
+        axis.ticks.length = unit(0.25, "cm"),
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
@@ -4360,17 +4492,17 @@ ggsave("sub_pro_12_land_prices_kenya/images/westlands/westlands_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1, 36.6),   
-  lowerRight = c(-1.5, 37.2), 
-  type = "osm",
-  minNumTiles = 12,  # Increase number of tiles for higher resolution
-  #zoom = 13          # Higher zoom level for more detail
+  upperLeft = c(-1.23, 36.78),   
+  lowerRight = c(-1.28, 36.83), 
+  type = "esri",
+  minNumTiles = 16,  # Increase number of tiles for higher resolution
+  zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Westlands
 points_df <- data.frame(
-  lat = c(-1.297918), 
-  lon = c(36.815052)
+  lat = c(-1.264831), 
+  lon = c(36.802054)
 )
 
 # Project coordinates
@@ -4392,63 +4524,6 @@ westlands_map
 
 # Save with high resolution
 ggsave("sub_pro_12_land_prices_kenya/images/westlands/westlands_map.png", 
-       westlands_map, width = 12, height = 8, dpi = 300)
+       westlands_map, width = 12, height = 12, dpi = 300)
 
 
-
-# FUTURE WORK #
-
-# use max to figure out groupings by average price
-
-max <- all_data_avg_price |> 
-  group_by(location) |>
-  summarize(max = max(average_price, na.rm = TRUE))
-
-location_1 <- c("Kiserian", "Kitengela", "Athi River", "Juja", "Thika")
-location_2 <- c("Limuru", "Ongata Rongai", "Syokimau", "Ruiru", "Ngong")
-
-location_3 <- c("Tigoni", "Mlolongo", "Kiambu", "Karen", "Langata")
-location_4 <- c("Donholm", "Ridgeways", "Runda", "Loresho", "Kitisuru", "Ruaka")
-
-location_5 <- c("Nyari", "Muthaiga", "Spring Valley", "Lavington", "Gigiri", "Eastleigh")
-location_6 <- c("Kileleshwa", "Riverside", "Parklands", "Kilimani", "Westlands", "Upper Hill")
-
-all_data_avg_price |>
-  filter(location %in% location_1) |>
-  ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line() +
-  geom_point() +
-  theme_classic() + 
-  scale_y_continuous(labels = scales::comma) 
-
-all_data_avg_price |>
-  filter(location %in% location_2) |>
-  ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line() +
-  geom_point() +
-  theme_classic() + 
-  scale_y_continuous(labels = scales::comma) 
-
-all_data_avg_price |>
-  filter(location %in% location_3) |>
-  ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line() +
-  geom_point() +
-  theme_classic() + 
-  scale_y_continuous(labels = scales::comma) 
-
-all_data_avg_price |>
-  filter(location %in% location_4) |>
-  ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line() +
-  geom_point() +
-  theme_classic() + 
-  scale_y_continuous(labels = scales::comma) 
-
-all_data_avg_price |>
-  filter(location %in% location_5) |>
-  ggplot(aes(quarter_year, average_price, color = location)) +
-  geom_line() +
-  geom_point() +
-  theme_classic() + 
-  scale_y_continuous(labels = scales::comma) 
