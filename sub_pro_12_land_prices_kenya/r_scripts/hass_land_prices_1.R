@@ -92,7 +92,7 @@ athi_river_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -105,8 +105,8 @@ athi_river_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 athi_river_avg_price 
 
@@ -140,7 +140,7 @@ athi_river_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -153,8 +153,8 @@ athi_river_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 athi_river_percentile 
 
@@ -170,7 +170,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/athi_river/athi_river_percentile.png
 nairobi_map <- openmap(
   upperLeft = c(-1.42, 36.94),   
   lowerRight = c(-1.47, 36.99), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -227,7 +227,7 @@ donholm_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -240,8 +240,8 @@ donholm_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 donholm_avg_price 
 
@@ -275,7 +275,7 @@ donholm_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -288,8 +288,8 @@ donholm_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 donholm_percentile 
 
@@ -305,7 +305,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/donholm/donholm_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.27, 36.86),   
   lowerRight = c(-1.32, 36.91), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -362,7 +362,7 @@ eastleigh_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -375,8 +375,8 @@ eastleigh_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 eastleigh_avg_price 
 
@@ -410,7 +410,7 @@ eastleigh_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -423,8 +423,8 @@ eastleigh_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 eastleigh_percentile 
 
@@ -440,7 +440,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/eastleigh/eastleigh_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.25, 36.82),   
   lowerRight = c(-1.30, 36.87), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -496,7 +496,7 @@ gigiri_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -509,8 +509,8 @@ gigiri_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 gigiri_avg_price 
 
@@ -544,7 +544,7 @@ gigiri_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -557,8 +557,8 @@ gigiri_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 gigiri_percentile 
 
@@ -574,7 +574,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/gigiri/gigiri_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.21, 36.78),   
   lowerRight = c(-1.26, 36.83), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -631,7 +631,7 @@ juja_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -644,8 +644,8 @@ juja_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 juja_avg_price 
 
@@ -679,7 +679,7 @@ juja_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -692,8 +692,8 @@ juja_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 juja_percentile 
 
@@ -709,7 +709,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/juja/juja_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.08, 36.98),   
   lowerRight = c(-1.13, 37.03), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -766,7 +766,7 @@ karen_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -779,8 +779,8 @@ karen_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 karen_avg_price 
 
@@ -814,7 +814,7 @@ karen_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -827,8 +827,8 @@ karen_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 karen_percentile 
 
@@ -844,7 +844,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/karen/karen_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.30, 36.68),   
   lowerRight = c(-1.35, 36.73), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -901,7 +901,7 @@ kiambu_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -914,8 +914,8 @@ kiambu_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kiambu_avg_price 
 
@@ -949,7 +949,7 @@ kiambu_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -962,8 +962,8 @@ kiambu_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kiambu_percentile 
 
@@ -979,7 +979,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/kiambu/kiambu_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.14, 36.80),   
   lowerRight = c(-1.19, 36.85), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1036,7 +1036,7 @@ kileleshwa_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1049,8 +1049,8 @@ kileleshwa_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kileleshwa_avg_price 
 
@@ -1084,7 +1084,7 @@ kileleshwa_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1097,8 +1097,8 @@ kileleshwa_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kileleshwa_percentile 
 
@@ -1112,17 +1112,17 @@ ggsave("sub_pro_12_land_prices_kenya/images/kileleshwa/kileleshwa_percentile.png
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.25, 36.77),   
-  lowerRight = c(-1.30, 36.82), 
-  type = "esri",
+  upperLeft = c(-1.26, 36.76),   
+  lowerRight = c(-1.31, 36.81), 
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kileleshwa
 points_df <- data.frame(
-  lat = c(-1.272483), 
-  lon = c(36.799666)
+  lat = c(-1.277413), 
+  lon = c(36.784903)
 )
 
 # Project coordinates
@@ -1171,7 +1171,7 @@ kilimani_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1184,8 +1184,8 @@ kilimani_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kilimani_avg_price 
 
@@ -1219,7 +1219,7 @@ kilimani_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1232,8 +1232,8 @@ kilimani_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kilimani_percentile 
 
@@ -1249,7 +1249,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/kilimani/kilimani_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.26, 36.76),   
   lowerRight = c(-1.31, 36.81), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1306,7 +1306,7 @@ kiserian_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1319,8 +1319,8 @@ kiserian_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kiserian_avg_price 
 
@@ -1354,7 +1354,7 @@ kiserian_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1367,8 +1367,8 @@ kiserian_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kiserian_percentile 
 
@@ -1382,17 +1382,17 @@ ggsave("sub_pro_12_land_prices_kenya/images/kiserian/kiserian_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.41, 36.66),   
-  lowerRight = c(-1.46, 36.71), 
-  type = "esri",
+  upperLeft = c(-1.40, 36.67),   
+  lowerRight = c(-1.45, 36.72), 
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Kiserian
 points_df <- data.frame(
-  lat = c(-1.429852), 
-  lon = c(36.686)
+  lat = c(-1.430), 
+  lon = c(36.687)
 )
 
 # Project coordinates
@@ -1441,7 +1441,7 @@ kitengela_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1454,8 +1454,8 @@ kitengela_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kitengela_avg_price 
 
@@ -1489,7 +1489,7 @@ kitengela_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1502,8 +1502,8 @@ kitengela_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kitengela_percentile 
 
@@ -1519,7 +1519,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/kitengela/kitengela_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.45, 36.94),   
   lowerRight = c(-1.5, 36.99), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1576,7 +1576,7 @@ kitisuru_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1589,8 +1589,8 @@ kitisuru_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kitisuru_avg_price 
 
@@ -1624,7 +1624,7 @@ kitisuru_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1637,8 +1637,8 @@ kitisuru_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 kitisuru_percentile 
 
@@ -1654,7 +1654,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/kitisuru/kitisuru_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.22, 36.75),   
   lowerRight = c(-1.27, 36.80), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1712,7 +1712,7 @@ langata_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1725,8 +1725,8 @@ langata_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 langata_avg_price 
 
@@ -1760,7 +1760,7 @@ langata_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1773,8 +1773,8 @@ langata_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 langata_percentile 
 
@@ -1790,7 +1790,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/langata/langata_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.31, 36.76),   
   lowerRight = c(-1.36, 36.81), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1848,7 +1848,7 @@ lavington_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1861,8 +1861,8 @@ lavington_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 lavington_avg_price 
 
@@ -1896,7 +1896,7 @@ lavington_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1909,8 +1909,8 @@ lavington_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 lavington_percentile 
 
@@ -1926,7 +1926,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/lavington/lavington_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.24, 36.75),   
   lowerRight = c(-1.29, 36.80), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -1983,7 +1983,7 @@ limuru_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -1996,8 +1996,8 @@ limuru_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 limuru_avg_price 
 
@@ -2031,7 +2031,7 @@ limuru_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2044,8 +2044,8 @@ limuru_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 limuru_percentile 
 
@@ -2061,7 +2061,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/limuru/limuru_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.09, 36.61),   
   lowerRight = c(-1.14, 36.66), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2118,7 +2118,7 @@ loresho_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2131,8 +2131,8 @@ loresho_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 loresho_avg_price 
 
@@ -2166,7 +2166,7 @@ loresho_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2179,8 +2179,8 @@ loresho_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 loresho_percentile 
 
@@ -2196,7 +2196,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/loresho/loresho_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.23, 36.72),   
   lowerRight = c(-1.28, 36.77), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2254,7 +2254,7 @@ mlolongo_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2267,8 +2267,8 @@ mlolongo_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 mlolongo_avg_price 
 
@@ -2302,7 +2302,7 @@ mlolongo_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2315,8 +2315,8 @@ mlolongo_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 mlolongo_percentile 
 
@@ -2332,7 +2332,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/mlolongo/mlolongo_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.36, 36.92),   
   lowerRight = c(-1.41, 36.97), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2389,7 +2389,7 @@ muthaiga_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2402,8 +2402,8 @@ muthaiga_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 muthaiga_avg_price 
 
@@ -2437,7 +2437,7 @@ muthaiga_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2450,8 +2450,8 @@ muthaiga_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 muthaiga_percentile 
 
@@ -2467,7 +2467,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/muthaiga/muthaiga_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.23, 36.80),   
   lowerRight = c(-1.28, 36.85), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2524,7 +2524,7 @@ ngong_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2537,8 +2537,8 @@ ngong_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ngong_avg_price 
 
@@ -2572,7 +2572,7 @@ ngong_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2585,8 +2585,8 @@ ngong_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ngong_percentile 
 
@@ -2602,7 +2602,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/ngong/ngong_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.34, 36.63),   
   lowerRight = c(-1.39, 36.68), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2659,7 +2659,7 @@ nyari_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2672,8 +2672,8 @@ nyari_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 nyari_avg_price 
 
@@ -2707,7 +2707,7 @@ nyari_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2720,8 +2720,8 @@ nyari_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 nyari_percentile 
 
@@ -2737,7 +2737,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/nyari/nyari_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.20, 36.76),   
   lowerRight = c(-1.25, 36.81), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -2794,7 +2794,7 @@ ongata_rongai_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2807,8 +2807,8 @@ ongata_rongai_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ongata_rongai_avg_price 
 
@@ -2842,7 +2842,7 @@ ongata_rongai_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2855,8 +2855,8 @@ ongata_rongai_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ongata_rongai_percentile 
 
@@ -2870,17 +2870,17 @@ ggsave("sub_pro_12_land_prices_kenya/images/ongata_rongai/ongata_rongai_percenti
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.24, 36.79),   
-  lowerRight = c(-1.29, 36.83), 
-  type = "esri",
+  upperLeft = c(-1.38, 36.73),   
+  lowerRight = c(-1.43, 36.78), 
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Ongata Rongai
 points_df <- data.frame(
-  lat = c(-1.263215), 
-  lon = c(36.810636)
+  lat = c(-1.396099), 
+  lon = c(36.752015)
 )
 
 # Project coordinates
@@ -2929,7 +2929,7 @@ parklands_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2942,8 +2942,8 @@ parklands_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 parklands_avg_price 
 
@@ -2977,7 +2977,7 @@ parklands_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -2990,8 +2990,8 @@ parklands_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 parklands_percentile 
 
@@ -3005,17 +3005,17 @@ ggsave("sub_pro_12_land_prices_kenya/images/parklands/parklands_percentile.png",
 # Get a map for the Nairobi area
 # The upperLeft and lowerRight are given as c(latitude, longitude)
 nairobi_map <- openmap(
-  upperLeft = c(-1.23, 36.80),   
-  lowerRight = c(-1.28, 36.85), 
-  type = "esri",
+  upperLeft = c(-1.24, 36.78),   
+  lowerRight = c(-1.29, 36.83), 
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
 
 # Define points for Parklands
 points_df <- data.frame(
-  lat = c(-1.253366), 
-  lon = c(36.829985)
+  lat = c(-1.266065), 
+  lon = c(36.809266)
 )
 
 # Project coordinates
@@ -3064,7 +3064,7 @@ ridgeways_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3077,8 +3077,8 @@ ridgeways_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ridgeways_avg_price 
 
@@ -3112,7 +3112,7 @@ ridgeways_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3125,8 +3125,8 @@ ridgeways_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ridgeways_percentile 
 
@@ -3142,7 +3142,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/ridgeways/ridgeways_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.20, 36.82),   
   lowerRight = c(-1.25, 36.87), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3199,7 +3199,7 @@ riverside_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3212,8 +3212,8 @@ riverside_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 riverside_avg_price 
 
@@ -3247,7 +3247,7 @@ riverside_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3260,8 +3260,8 @@ riverside_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 riverside_percentile 
 
@@ -3277,7 +3277,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/riverside/riverside_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.25, 36.77),   
   lowerRight = c(-1.30, 36.82), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3334,7 +3334,7 @@ ruaka_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3347,8 +3347,8 @@ ruaka_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ruaka_avg_price 
 
@@ -3382,7 +3382,7 @@ ruaka_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3395,8 +3395,8 @@ ruaka_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ruaka_percentile 
 
@@ -3412,7 +3412,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/ruaka/ruaka_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.18, 36.76),   
   lowerRight = c(-1.23, 36.81), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3469,7 +3469,7 @@ ruiru_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3482,8 +3482,8 @@ ruiru_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ruiru_avg_price 
 
@@ -3517,7 +3517,7 @@ ruiru_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3530,8 +3530,8 @@ ruiru_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 ruiru_percentile 
 
@@ -3547,7 +3547,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/ruiru/ruiru_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.12, 36.94),   
   lowerRight = c(-1.17, 36.99), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3605,7 +3605,7 @@ runda_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3618,8 +3618,8 @@ runda_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 runda_avg_price 
 
@@ -3653,7 +3653,7 @@ runda_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3666,8 +3666,8 @@ runda_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 runda_percentile 
 
@@ -3683,7 +3683,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/runda/runda_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.19, 36.78),   
   lowerRight = c(-1.24, 36.83), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3740,7 +3740,7 @@ spring_valley_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3753,8 +3753,8 @@ spring_valley_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 spring_valley_avg_price 
 
@@ -3788,7 +3788,7 @@ spring_valley_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3801,8 +3801,8 @@ spring_valley_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 spring_valley_percentile 
 
@@ -3818,7 +3818,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/spring_valley/spring_valley_percenti
 nairobi_map <- openmap(
   upperLeft = c(-1.23, 36.77),   
   lowerRight = c(-1.28, 36.82), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -3875,7 +3875,7 @@ syokimau_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3888,8 +3888,8 @@ syokimau_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 syokimau_avg_price 
 
@@ -3923,7 +3923,7 @@ syokimau_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -3936,8 +3936,8 @@ syokimau_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 syokimau_percentile 
 
@@ -3953,7 +3953,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/syokimau/syokimau_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.35, 36.90),   
   lowerRight = c(-1.40, 36.95), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -4011,7 +4011,7 @@ thika_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4024,8 +4024,8 @@ thika_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 thika_avg_price 
 
@@ -4059,7 +4059,7 @@ thika_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4072,8 +4072,8 @@ thika_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 thika_percentile 
 
@@ -4089,7 +4089,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/thika/thika_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.01, 37.06),   
   lowerRight = c(-1.06, 37.11), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -4146,7 +4146,7 @@ tigoni_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4159,8 +4159,8 @@ tigoni_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 tigoni_avg_price 
 
@@ -4194,7 +4194,7 @@ tigoni_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4207,8 +4207,8 @@ tigoni_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 tigoni_percentile 
 
@@ -4224,7 +4224,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/tigoni/tigoni_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.10, 36.66),   
   lowerRight = c(-1.15, 36.71), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -4281,7 +4281,7 @@ upper_hill_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4294,8 +4294,8 @@ upper_hill_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 upper_hill_avg_price 
 
@@ -4329,7 +4329,7 @@ upper_hill_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4342,8 +4342,8 @@ upper_hill_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 upper_hill_percentile 
 
@@ -4359,7 +4359,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/upper_hill/upper_hill_percentile.png
 nairobi_map <- openmap(
   upperLeft = c(-1.28, 36.79),   
   lowerRight = c(-1.33, 36.84), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
@@ -4416,7 +4416,7 @@ westlands_avg_price <- all_data_avg_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4429,8 +4429,8 @@ westlands_avg_price <- all_data_avg_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 westlands_avg_price 
 
@@ -4464,7 +4464,7 @@ westlands_percentile <- all_data_percentile_price |>
   theme(legend.position="bottom",
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 14),
-        legend.background = element_rect(fill = "azure2"),
+        legend.background = element_rect(fill = NA),
         panel.grid.major.x=element_blank(),
         panel.grid.minor.x=element_blank(),
         panel.grid.minor.y=element_blank(),
@@ -4477,8 +4477,8 @@ westlands_percentile <- all_data_percentile_price |>
         plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         plot.margin = unit(c(0.2,0.2,0.2,0.2), "inches"),
-        plot.background = element_rect(fill = "azure2", color = "azure2"),
-        panel.background = element_rect(fill = "azure2", color = "azure2"))
+        plot.background = element_rect(fill = NA, color = NA),
+        panel.background = element_rect(fill = NA, color = NA))
 
 westlands_percentile 
 
@@ -4494,7 +4494,7 @@ ggsave("sub_pro_12_land_prices_kenya/images/westlands/westlands_percentile.png",
 nairobi_map <- openmap(
   upperLeft = c(-1.23, 36.78),   
   lowerRight = c(-1.28, 36.83), 
-  type = "esri",
+  type = "osm",
   minNumTiles = 16,  # Increase number of tiles for higher resolution
   zoom = 14          # Higher zoom level for more detail
 )
