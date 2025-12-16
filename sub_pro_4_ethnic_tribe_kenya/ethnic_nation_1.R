@@ -33,7 +33,7 @@ eth_nat_large_tribe <- eth_nat %>%
          ethnicity_nationality == "MIJIKENDA" | 
          ethnicity_nationality == "MERU" |
          ethnicity_nationality == "MAASAI" | 
-         ethnicity_nationality =="TURKANA")
+         ethnicity_nationality == "TURKANA")
 
 eth_nat_large_tribe_totals <- eth_nat_large_tribe %>%
   filter(subgroup == "")
