@@ -8,14 +8,23 @@ This repository contains a collection of data visualizations about various topic
 
 ## Example visualizations
 
-### 1) Unlabeled Map of Kenya
+### 1) Land Prices in Kenya (Upper Hill Area)
+
+[Code](sub_pro_2_land_prices_kenya/r_scripts/hass_land_prices_1.R)
+
+![](sub_pro_2_land_prices_kenya/images/upper_hill/upper_hill_avg_price.png)
+![](sub_pro_2_land_prices_kenya/images/upper_hill/upper_hill_map.png)
+
+### 2) Unlabeled Map of Kenya
+
+[Code](sub_pro_3_disturb_danger_kenya/r_scripts/danger_disturb.R)
 
 ![Map of Kenya](sub_pro_3_disturb_danger_kenya/images/kenya_map_1.png)
 
-### 2) Composition of the National Assembly of Kenya in August 2022
+### 3) Composition of the National Assembly of Kenya in August 2022
+
+[Code](sub_pro_6_national_assembly_kenya/r_scripts/national_assembly_1.R)
 
 ![National Assembly](sub_pro_6_national_assembly_kenya/images/parliament.png)
 
-### 3) Gender composition of Chief Administrative Secretary appointees in 2023
 
-![Gender composition](sub_pro_8_psc_job_analysis_kenya/images/app_stl_nom_cas_gender.jpg)
