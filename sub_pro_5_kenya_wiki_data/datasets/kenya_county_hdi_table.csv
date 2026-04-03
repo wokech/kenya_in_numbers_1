@@ -1,0 +1,51 @@
+Rank,∆,County,HDI (2023),Growth
+High Human Development (≥ 0.7),High Human Development (≥ 0.7),High Human Development (≥ 0.7),High Human Development (≥ 0.7),High Human Development (≥ 0.7)
+1,,Nairobi,0.771,2.69
+Medium Human development (≥ 0.55),Medium Human development (≥ 0.55),Medium Human development (≥ 0.55),Medium Human development (≥ 0.55),Medium Human development (≥ 0.55)
+2,(1),Mombasa,0.698,0.71
+3,(1),Nyeri,0.678,0.05
+4,,Kiambu,0.663,0.28
+5,,Uasin Gishu,0.654,0.51
+6,(1),Embu,0.650,0.83
+7,,Kirinyaga,0.646,0.66
+8,,Nakuru,0.641,0.74
+9,(5),Nyandarua,0.637,1.17
+10,(1),Laikipia,0.635,0.76
+11,(5),Machakos,0.633,1.17
+12,(2),Meru,0.632,0.59
+13,(2),Taita Taveta,0.630,0.92
+14,(3),Nandi,0.627,0.97
+15,(3),Tharaka Nithi,0.626,0.61
+16,(2),Murang'a,0.625,0.92
+17,(4),Kisumu,0.621,1.02
+18,(4),Elgeyo-Marakwet,0.620,0.99
+19,(10),Lamu,0.620,0.10
+20,(7),Trans Nzoia,0.620,0.49
+21,(4),Kericho,0.619,1.30
+22,(2),Bungoma,0.618,0.87
+23,(4),Nyamira,0.616,0.60
+24,(3),Bomet,0.613,1.34
+25,(1),Kisii,0.613,0.83
+26,(3),Baringo,0.609,0.59
+27,(2),Kajiado,0.609,1.28
+28,(2),Kakamega,0.606,0.81
+29,(2),Kitui,0.602,1.29
+30,(2),Vihiga,0.602,0.95
+31,(1),Makueni,0.595,1.33
+32,(2),Busia,0.594,0.83
+33,(6),Siaya,0.583,1.79
+34,(1),Narok,0.578,0.86
+35,(2),Kilifi,0.574,1.23
+36,(7),Homa Bay,0.573,1.78
+37,(1),Kwale,0.573,1.30
+38,(4),Migori,0.567,1.47
+39,(3),Isiolo,0.554,0.30
+Low Human development (< 0.55),Low Human development (< 0.55),Low Human development (< 0.55),Low Human development (< 0.55),Low Human development (< 0.55)
+40,,West Pokot,0.534,0.23
+41,(7),Marsabit,0.522,1.60
+42,(7),Samburu,0.509,2.00
+43,(1),Tana River,0.497,0.78
+44,(1),Garissa,0.494,0.96
+45,(4),Turkana,0.492,2.14
+46,,Wajir,0.491,1.06
+47,,Mandera,0.484,0.76

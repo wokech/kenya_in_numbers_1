@@ -10,6 +10,7 @@ library(tm)
 library(wordcloud)
 library(topicmodels)
 library(broom)
+library(reshape2)
 
 # 1. Load Word doc with officer
 doc_path <- "sub_pro_10_speech_analysis_kenya/datasets/ruto_speeches/jamhuri_day/jamhuri_day_celebrations_speech_2024.docx"
